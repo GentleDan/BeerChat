@@ -1,13 +1,7 @@
-import {
-  type ChangeEvent,
-  type FormEvent,
-  type RefObject,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, RefObject, useRef, useState } from "react";
 import { TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import bg from "../../../public/authBg.jpeg";
+import bg from "./ui/authBg.jpeg";
 import styles from "./styles.module.scss";
 
 export const AuthPage = () => {

@@ -15,11 +15,20 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/lab": "^7.0.0-beta.12",
     "@mui/material": "^7.1.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tanstack/react-query": "^5.77.0",
+    "axios": "^1.9.0",
+    "compose-function": "^3.0.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "react-router": "^6.30.1",
+    "react-router-dom": "^6.30.1",
+    "sass": "^1.89.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/compose-function": "^0.0.33",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.9.0",

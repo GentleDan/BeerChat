@@ -1,33 +1,26 @@
-import { useState } from "react";
+import { withProviders } from "./providers";
+import { CssBaseline } from "@mui/material";
+import { useEffect } from "react";
+import { initApi } from "../shared/lib/axios.ts";
+import Routing from "../pages";
 import "./index.scss";
 
-const application = () => {
-  const [count, setCount] = useState(0);
+let isInitApi = false;
+
+const Providers = () => {
+  useEffect(() => {
+    if (isInitApi) return;
+    isInitApi = true;
+
+    initApi();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={"tmp"} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={"tmp"} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <CssBaseline />
+      <Routing />
     </>
   );
 };
 
-export const App = application;
+export const App = withProviders(Providers);
