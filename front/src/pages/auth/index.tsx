@@ -1,7 +1,10 @@
 import { ChangeEvent, FormEvent, RefObject, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import bg from "./ui/authBg.jpeg";
+import { setAppUser } from "../../entities/user/model";
+import { login, registerUser } from "../../entities/user/api";
+import bg from "./ui/images/authBg.jpeg";
 import styles from "./styles.module.scss";
 
 export const AuthPage = () => {
@@ -60,6 +63,7 @@ type LoginContentProps = {
 const LoginContent = (props: LoginContentProps) => {
   const [fields, setFields] = useState({ login: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFields((prevState) => ({
@@ -71,6 +75,11 @@ const LoginContent = (props: LoginContentProps) => {
   const onClickHandler = () => {
     if (!props.formRef?.current?.checkValidity() || isLoading) return;
     setIsLoading(true);
+
+    login({ ...fields })
+      .then(({ data }) => setAppUser({ ...data, dispatch }))
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -120,6 +129,7 @@ const RegisterContent = (props: LoginContentProps) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setFields((prevState) => ({
@@ -131,6 +141,15 @@ const RegisterContent = (props: LoginContentProps) => {
   const onClickHandler = () => {
     if (!props.formRef?.current?.checkValidity() || isLoading) return;
     setIsLoading(true);
+
+    registerUser({
+      login: fields.login,
+      password: fields.password,
+      username: fields.username,
+    })
+      .then(({ data }) => setAppUser({ ...data, dispatch }))
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   return (
